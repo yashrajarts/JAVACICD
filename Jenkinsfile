@@ -7,24 +7,24 @@ pipeline {
         stage('Build Maven'){
             steps{
                 checkout([$class: 'GitSCM', branches: [[name: '*/master']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/yashrajarts/JAVACICD.git']]])
-                sh 'mvn clean install'
+                bat 'mvn clean install'
             }
         }
         stage('Build docker image'){
             steps{
                 script{
-                    sh 'docker build -t javatechie/devops-integration .'
+                    bat 'docker build -t yashrajarts/devops-integration .'
                 }
             }
         }
         stage('Push image to Hub'){
             steps{
                 script{
-                   withCredentials([string(credentialsId: 'dockerhub-pwd', variable: 'dockerhubpwd')]) {
-                   sh 'docker login -u javatechie -p ${dockerhubpwd}'
+                   withCredentials([string(credentialsId: 'yash', variable: 'yash')]) {
+                   bat 'docker login -u yashrajarts -p ${yash}'
 
 }
-                   sh 'docker push javatechie/devops-integration'
+                   bat 'docker push yashrajarts/devops-integration'
                 }
             }
         }
