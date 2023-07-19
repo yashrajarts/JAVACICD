@@ -58,7 +58,6 @@
 			</plugin>
 		</plugins>
 		<finalName>devops-integration</finalName>
-		<packaging>war</packaging>
 	</build>
 
 </project>
